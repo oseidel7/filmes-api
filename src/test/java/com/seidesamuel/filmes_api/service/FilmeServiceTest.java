@@ -13,6 +13,7 @@ import com.seidesamuel.filmes_api.repository.CategoriaRepository;
 import com.seidesamuel.filmes_api.repository.FilmeRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -192,7 +193,17 @@ public class FilmeServiceTest {
         assertEquals(filmeDTO.getAno(), resultado.getAno());
 
         //verify
-        verify(filmeRepository).save(any(Filme.class));
+        ArgumentCaptor<Filme> captor = ArgumentCaptor.forClass(Filme.class);
+
+        verify(filmeRepository).save(captor.capture());
+        Filme capturado = captor.getValue();
+        //asserts do capturado
+        assertEquals(filmeDTO.getTitulo(), capturado.getTitulo());
+        assertEquals(filmeDTO.getDiretor(), capturado.getDiretor());
+        assertEquals(filmeDTO.getAno(), capturado.getAno());
+        assertEquals(filmeDTO.getCategoriaId(), capturado.getCategoria().getId());
+        assertEquals(filmeDTO.getAtoresIds().get(0), capturado.getAtores().get(0).getId());
+
         verify(filmeRepository).existsByTituloAndDiretor(filme.getTitulo(), filme.getDiretor());
 
     }
