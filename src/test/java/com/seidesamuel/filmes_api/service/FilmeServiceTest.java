@@ -108,7 +108,7 @@ public class FilmeServiceTest {
         filmeDTO.setTitulo("Interestelar");
         filmeDTO.setDiretor("Christopher Nolan");
         filmeDTO.setCategoriaId(idCategoria);
-        filmeDTO.setAtoresId(List.of(idAtor));
+        filmeDTO.setAtoresIds(List.of(idAtor));
         filmeDTO.setAno(Year.now().getValue() + 15);
 
         FilmeInvalidoException excecao = assertThrows(FilmeInvalidoException.class, () -> filmeService.adicionarFilme(filmeDTO));
@@ -136,7 +136,7 @@ public class FilmeServiceTest {
         filmeDTO.setTitulo("Interestelar");
         filmeDTO.setDiretor("Christopher Nolan");
         filmeDTO.setCategoriaId(idCategoria);
-        filmeDTO.setAtoresId(List.of(idAtor));
+        filmeDTO.setAtoresIds(List.of(idAtor));
         filmeDTO.setAno(2013);
         when(filmeRepository.existsByTituloAndDiretor(filmeDTO.getTitulo(), filmeDTO.getDiretor())).thenReturn(true);
 
@@ -177,7 +177,7 @@ public class FilmeServiceTest {
         filmeDTO.setTitulo(filme.getTitulo());
         filmeDTO.setDiretor(filme.getDiretor());
         filmeDTO.setAno(filme.getAno());
-        filmeDTO.setAtoresId(List.of(idAtor));
+        filmeDTO.setAtoresIds(List.of(idAtor));
         filmeDTO.setCategoriaId(idCategoria);
         when(filmeRepository.save(any(Filme.class))).thenReturn(filme);
 

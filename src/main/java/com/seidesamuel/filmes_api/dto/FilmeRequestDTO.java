@@ -64,7 +64,7 @@ public class FilmeRequestDTO {
         return this.atoresIds;
     }
 
-    public void setAtoresId(List<Long> atoresIds) {
+    public void setAtoresIds(List<Long> atoresIds) {
         this.atoresIds = atoresIds;
     }
 }
